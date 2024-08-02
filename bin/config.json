@@ -30,16 +30,7 @@
       }
     },
     "embeddingsModels": [
-      {
-        "provider": "sagemaker",
-        "name": "intfloat/multilingual-e5-large",
-        "dimensions": 1024
-      },
-      {
-        "provider": "sagemaker",
-        "name": "sentence-transformers/all-MiniLM-L6-v2",
-        "dimensions": 384
-      },
+      
       {
         "provider": "bedrock",
         "name": "amazon.titan-embed-text-v1",
