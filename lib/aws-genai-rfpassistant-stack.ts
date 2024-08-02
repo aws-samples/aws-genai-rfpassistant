@@ -21,7 +21,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
   constructor(
     scope: Construct,
     id: string,
-    props: AwsGenAILLMChatbotStackProps
+    props: AwsGenaiRfpAssistantStackProps
   ) {
     super(scope, id, {
       description: "AWS RFP CHATBOT",

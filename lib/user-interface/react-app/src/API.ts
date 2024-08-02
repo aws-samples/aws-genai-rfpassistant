@@ -219,7 +219,7 @@ export type Session = {
   __typename: "Session",
   id: string,
   title?: string | null,
-  startTime?: string | null,
+  startTime: string,
   s3ObjectKey?: string | null,
   history?:  Array<SessionHistoryItem | null > | null,
 };
@@ -810,7 +810,7 @@ export type ListSessionsQuery = {
     __typename: "Session",
     id: string,
     title?: string | null,
-    startTime?: string | null,
+    startTime: string,
     s3ObjectKey?: string | null,
     history?:  Array< {
       __typename: "SessionHistoryItem",
@@ -856,7 +856,7 @@ export type GetSessionQuery = {
     __typename: "Session",
     id: string,
     title?: string | null,
-    startTime?: string | null,
+    startTime: string,
     s3ObjectKey?: string | null,
     history?:  Array< {
       __typename: "SessionHistoryItem",
