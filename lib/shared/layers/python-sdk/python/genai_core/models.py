@@ -56,18 +56,7 @@ def list_azure_openai_models():
     # azure openai model are listed, comma separated in AZURE_OPENAI_MODELS variable in external API secret
     models = genai_core.parameters.get_external_api_key("AZURE_OPENAI_MODELS") or ""
 
-    return [
-        {
-            "provider": Provider.AZURE_OPENAI.value,
-            "name": model,
-            "streaming": True,
-            "inputModalities": [Modality.TEXT.value],
-            "outputModalities": [Modality.TEXT.value],
-            "interface": ModelInterface.LANGCHIAN.value,
-            "ragSupported": True,
-        }
-        for model in models.split(',')
-    ]
+    return []
 
 def list_bedrock_models():
     try:
@@ -86,23 +75,20 @@ def list_bedrock_models():
             == genai_core.types.ModelStatus.ACTIVE.value
         ]
 
-        models = [
-            {
-                "provider": Provider.BEDROCK.value,
-                "name": model["modelId"],
-                "streaming": model.get("responseStreamingSupported", False),
-                "inputModalities": model["inputModalities"],
-                "outputModalities": model["outputModalities"],
-                "interface": ModelInterface.LANGCHIAN.value,
-                "ragSupported": True,
-            }
-            for model in bedrock_models
-            # Exclude embeddings and stable diffusion models
-            if "inputModalities" in model
-            and "outputModalities" in model
-            and Modality.EMBEDDING.value not in model.get("outputModalities", [])
-            and Modality.IMAGE.value not in model.get("outputModalities", [])
-        ]
+        models = []
+        for model in bedrock_models:
+            if model["modelId"].startswith("anthropic.claude-3"):
+                if "inputModalities" in model and "outputModalities" in model and Modality.EMBEDDING.value not in model.get("outputModalities", []) and Modality.IMAGE.value not in model.get("outputModalities", []):
+                    m = {
+                            "provider": Provider.BEDROCK.value,
+                            "name": model["modelId"],
+                            "streaming": model.get("responseStreamingSupported", False),
+                            "inputModalities": model["inputModalities"],
+                            "outputModalities": model["outputModalities"],
+                            "interface": ModelInterface.LANGCHIAN.value,
+                            "ragSupported": True,
+                        }
+                models.append(m)
 
         return models
     except Exception as e:
