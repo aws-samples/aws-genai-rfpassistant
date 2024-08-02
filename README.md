@@ -47,7 +47,6 @@
   - [Supported AWS Regions](#supported-aws-regions)
   - [Quotas](#quotas)
   - [Clean up](#clean-up-1)
-  - [Authors](#authors)
   - [Legal Disclaimer:](#legal-disclaimer)
     - [Use of Third-Party models](#use-of-third-party-models)
     - [Use of Prompt Engineering Templates](#use-of-prompt-engineering-templates)
@@ -504,8 +503,6 @@ You can remove the stacks and all the associated resources created in your AWS a
 npx cdk destroy
 ```
 After deleting your stack, do not forget to delete the logs and content uploaded to the account.
-
-## Authors
 
 ## Legal Disclaimer:
 
