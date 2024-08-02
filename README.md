@@ -5,6 +5,7 @@
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
   - [Configuration](#configuration)
+  - [Special Mention](#special-mention)
   - [Deployment](#deployment)
     - [Environment setup](#environment-setup)
       - [AWS Cloud9](#aws-cloud9)
@@ -22,9 +23,7 @@
     - [Overview](#overview-1)
     - [Authentication](#authentication)
     - [Retrieval Augmented Generation (RAG) Engines](#retrieval-augmented-generation-rag-engines)
-      - [Amazon Aurora PostgreSQL](#amazon-aurora-postgresql)
       - [Amazon OpenSearch Serverless Service](#amazon-opensearch-serverless-service)
-      - [Amazon Kendra](#amazon-kendra)
       - [Amazon Simple Storage Service (S3)](#amazon-simple-storage-service-s3)
       - [DynamoDB](#dynamodb)
       - [Step Functions](#step-functions)
@@ -60,26 +59,75 @@
 
 ## Configuration
 
-Before deploying the solution, make sure the configuration in ``bin/artifacts-and-tools.ts`` is correct.
+Before deploying the solution, make sure the configuration in ``bin/config.json`` is correct.
 
 ```js
 {
-  bedrockRegion: "us-east-1",
-  bedrockModel: "anthropic.claude-3-5-sonnet-20240620-v1:0",
-  playground: {
-    enabled: true,
+  "prefix": "",
+  "privateWebsite": false,
+  "certificate": "",
+  "domain": "",
+  "cfGeoRestrictEnable": false,
+  "cfGeoRestrictList": [],
+  "companyName": "AnyCompany",
+  "bedrock": {
+    "enabled": true,
+    "region": "us-west-2"
   },
-  artifacts: {
-    enabled: true,
+  "llms": {
+    "sagemaker": []
   },
-  codeInterpreterTool: {
-    enabled: true,
-  },
-  webSearchTool: {
-    enabled: false,
-  },
+  "rag": {
+    "enabled": true,
+    "engines": {
+      "aurora": {
+        "enabled": false
+      },
+      "opensearch": {
+        "enabled": true
+      },
+      "kendra": {
+        "enabled": false,
+        "createIndex": false,
+        "external": [],
+        "enterprise": false
+      }
+    },
+    "embeddingsModels": [
+      {
+        "provider": "bedrock",
+        "name": "amazon.titan-embed-text-v1",
+        "dimensions": 1536
+      },
+      {
+        "provider": "bedrock",
+        "name": "amazon.titan-embed-image-v1",
+        "dimensions": 1024
+      },
+      {
+        "provider": "bedrock",
+        "name": "cohere.embed-english-v3",
+        "dimensions": 1024,
+        "default": true
+      },
+      {
+        "provider": "bedrock",
+        "name": "cohere.embed-multilingual-v3",
+        "dimensions": 1024
+      }
+    ],
+    "crossEncoderModels": [
+      {
+        "provider": "sagemaker",
+        "name": "cross-encoder/ms-marco-MiniLM-L-12-v2",
+        "default": true
+      }
+    ]
+  }
 }
 ```
+## Special Mention
+This project incorporates code and resources from the [aws-genai-llm-chatbot](https://github.com/aws-samples/aws-genai-llm-chatbot/) repository. We are grateful for their contributions and the open-source community's collaborative spirit. The original repository can be found at [Repository URL](https://github.com/aws-samples/aws-genai-llm-chatbot/), and we encourage others to explore and contribute to their excellent work.
 
 ## Deployment
 
@@ -335,7 +383,7 @@ Application also chat capability in case user wants to ask a single question and
 
 ## Architecture Design
 
-![](./assets/architecture.png)
+![](./assets/RFPassistant0802.drawio.png)
 
 ### Overview
 This page aims to document the AWS Resources that will be deployed to help understand what permissions will be required to successfully deploy the solution.
@@ -355,15 +403,10 @@ Amazon Cognito
 ### Retrieval Augmented Generation (RAG) Engines
 This section describes the RAG engines that house and return stored data for use with Generative AI. Additionally this section includes resources deployed to support data ingestion and processing for RAG.
 
-#### Amazon Aurora PostgreSQL
-- RAG Workspaces: If option is enabled, users can create PostgreSQL w/ pgvector data stores for Retrieval Augmented Generation (RAG) workspaces. [Optional]
-  - Note: This is not enabled by default, user must choose to enable this during pre-deployment configuration.
 #### Amazon OpenSearch Serverless Service
 - RAG Workspaces: If option is enabled, users can create OpenSearch Serverless Collections for Retrieval Augmented Generation (RAG) workspaces. [Optional]
   - Note: This is not enabled by default, user must choose to enable this during pre-deployment configuration.
-#### Amazon Kendra
-- RAG Workspaces: If option is enabled, users can create Kendra data stores for Retrieval Augmented Generation (RAG) workspaces. [Optional]
-  - Note: This is not enabled by default, user must choose to enable this during pre-deployment configuration.
+
 #### Amazon Simple Storage Service (S3)
 - File Uploads Bucket: Files uploaded into a RAG workspaces [Required]
 - Processing Bucket: Bucket to house files being processed for a RAG workspace [Required]
