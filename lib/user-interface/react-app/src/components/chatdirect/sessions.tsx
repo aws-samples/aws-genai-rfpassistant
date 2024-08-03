@@ -59,7 +59,7 @@ export default function Sessions(props: SessionsProps) {
 
     const apiClient = new ApiClient(appContext);
     try {
-      const result = await apiClient.sessions.getSessions('chat');
+      const result = await apiClient.sessions.getSessions("chat");
       setSessions(result.data!.listSessions);
     } catch (e) {
       console.log(e);
@@ -83,7 +83,7 @@ export default function Sessions(props: SessionsProps) {
     setIsLoading(true);
     const apiClient = new ApiClient(appContext);
     await Promise.all(
-      selectedItems.map((s) => apiClient.sessions.deleteSession(s.id, 'chat'))
+      selectedItems.map((s) => apiClient.sessions.deleteSession(s.id, "chat"))
     );
     await getSessions();
     setIsLoading(false);
@@ -94,7 +94,7 @@ export default function Sessions(props: SessionsProps) {
     if (!appContext) return;
     setIsLoading(true);
     const apiClient = new ApiClient(appContext);
-    await apiClient.sessions.deleteSessions('chat');
+    await apiClient.sessions.deleteSessions("chat");
     await getSessions();
     setIsLoading(false);
   };

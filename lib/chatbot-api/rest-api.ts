@@ -264,7 +264,7 @@ export class ApiResolvers extends Construct {
       props.sessionsTable.grantReadWriteData(apiHandler);
       props.questionsTable.grantReadWriteData(apiHandler);
       props.filesBucket.grantReadWrite(apiHandler);
-      props.userFeedbackBucket.grantReadWrite(apiHandler);      
+      props.userFeedbackBucket.grantReadWrite(apiHandler);
       props.ragEngines?.uploadBucket.grantReadWrite(apiHandler);
       props.ragEngines?.processingBucket.grantReadWrite(apiHandler);
 
@@ -310,11 +310,14 @@ export class ApiResolvers extends Construct {
     );
 
     function addResolvers(operationType: string) {
+
+      /* eslint-disable  @typescript-eslint/no-explicit-any */
       const fieldNames = (
         schema.definitions
           .filter((x) => x.kind == "ObjectTypeDefinition")
           .filter((y: any) => y.name.value == operationType)[0] as any
       ).fields.map((z: any) => z.name.value);
+      /* eslint-enable  @typescript-eslint/no-explicit-any */
 
       for (const fieldName of fieldNames) {
         // These resolvers are added by the Realtime API

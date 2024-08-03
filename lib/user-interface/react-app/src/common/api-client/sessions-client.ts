@@ -12,11 +12,11 @@ import {
 export class SessionsClient {
   async getSessions(
     sessionType: string
-    ): Promise<GraphQLResult<GraphQLQuery<ListSessionsQuery>>> {
+  ): Promise<GraphQLResult<GraphQLQuery<ListSessionsQuery>>> {
     const result = await API.graphql<GraphQLQuery<ListSessionsQuery>>({
       query: listSessions,
-      variables: {        
-        sessionType: sessionType
+      variables: {
+        sessionType: sessionType,
       },
     });
     return result;
@@ -30,7 +30,7 @@ export class SessionsClient {
       query: getSession,
       variables: {
         id: sessionId,
-        sessionType: sessionType
+        sessionType: sessionType,
       },
     });
     return result;
@@ -44,19 +44,19 @@ export class SessionsClient {
       query: deleteSession,
       variables: {
         id: sessionId,
-        sessionType: sessionType
+        sessionType: sessionType,
       },
     });
     return result;
   }
 
-  async deleteSessions(sessionType: string): Promise<
-    GraphQLResult<GraphQLQuery<DeleteUserSessionsMutation>>
-  > {
+  async deleteSessions(
+    sessionType: string
+  ): Promise<GraphQLResult<GraphQLQuery<DeleteUserSessionsMutation>>> {
     const result = await API.graphql<GraphQLQuery<DeleteUserSessionsMutation>>({
       query: deleteUserSessions,
-      variables: {        
-        sessionType: sessionType
+      variables: {
+        sessionType: sessionType,
       },
     });
     return result;

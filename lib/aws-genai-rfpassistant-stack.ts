@@ -21,7 +21,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
   constructor(
     scope: Construct,
     id: string,
-    props: AwsGenAILLMChatbotStackProps
+    props: AwsGenaiRfpAssistantStackProps
   ) {
     super(scope, id, {
       description: "AWS RFP CHATBOT",
@@ -72,7 +72,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
           sessionsTable: chatBotApi.sessionsTable,
           questionsTable: chatBotApi.questionsTable,
           bySessionIdIndex: chatBotApi.bySessionIdIndex,
-          filesBucket: chatBotApi.filesBucket
+          filesBucket: chatBotApi.filesBucket,
         }
       );
 
@@ -104,7 +104,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
     // IDEFICS Interface Construct
     // This is the model interface receiving messages from the websocket interface via the message topic
     // and interacting with IDEFICS visual language models
-    const ideficsModels = models.models.filter(
+    models.models.filter(
       (model) => model.interface === ModelInterface.MultiModal
     );
 
@@ -114,7 +114,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
       shared,
       config: props.config,
       messagesTopic: chatBotApi.messagesTopic,
-      sessionsTable: chatBotApi.sessionsTable,    
+      sessionsTable: chatBotApi.sessionsTable,
       questionsTable: chatBotApi.questionsTable,
       bySessionIdIndex: chatBotApi.bySessionIdIndex,
       chatbotFilesBucket: chatBotApi.filesBucket,

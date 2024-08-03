@@ -147,4 +147,3 @@ export enum ChabotOutputModality {
   Image = "IMAGE",
   Embedding = "EMBEDDING",
 }
-

@@ -44,7 +44,10 @@ function App() {
               <Route path="playground" element={<Playground />} />
               <Route path="playground/:sessionId" element={<Playground />} />
               <Route path="chat-playground" element={<ChatPlayground />} />
-              <Route path="chat-playground/:sessionId" element={<ChatPlayground />} />
+              <Route
+                path="chat-playground/:sessionId"
+                element={<ChatPlayground />}
+              />
               <Route path="sessions" element={<SessionPage />} />
               <Route path="chat-sessions" element={<ChatSessionPage />} />
               <Route path="multichat" element={<MultiChatPlayground />} />

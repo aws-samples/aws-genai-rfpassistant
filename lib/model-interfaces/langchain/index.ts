@@ -13,7 +13,6 @@ import * as path from "path";
 import { RagEngines } from "../../rag-engines";
 import { Shared } from "../../shared";
 import { SystemConfig } from "../../shared/types";
-import { NagSuppressions } from "cdk-nag";
 
 interface LangChainInterfaceProps {
   readonly shared: Shared;
@@ -50,9 +49,9 @@ export class LangChainInterface extends Construct {
         ...props.shared.defaultEnvironmentVariables,
         CONFIG_PARAMETER_NAME: props.shared.configParameter.parameterName,
         COMPANY_PARAMETER_NAME: props.shared.companyParameter.parameterName,
-        SESSIONS_TABLE_NAME: props.sessionsTable.tableName,      
+        SESSIONS_TABLE_NAME: props.sessionsTable.tableName,
         QUESTIONS_TABLE_NAME: props.questionsTable.tableName,
-        QUESTIONS_BY_SESSION_INDEX_NAME: props.bySessionIdIndex,         
+        QUESTIONS_BY_SESSION_INDEX_NAME: props.bySessionIdIndex,
         CHATBOT_FILES_BUCKET_NAME: props.filesBucket.bucketName,
         API_KEYS_SECRETS_ARN: props.shared.apiKeysSecret.secretArn,
         MESSAGES_TOPIC_ARN: props.messagesTopic.topicArn,

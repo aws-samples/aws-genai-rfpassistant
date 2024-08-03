@@ -4,7 +4,7 @@ import {
   PropertyFilterOperator,
 } from "@cloudscape-design/collection-hooks";
 import { Model } from "../../../API";
-
+/* eslint-disable react-refresh/only-export-components */
 export const ModelsColumnDefinitions: TableProps.ColumnDefinition<Model>[] = [
   {
     id: "provider",

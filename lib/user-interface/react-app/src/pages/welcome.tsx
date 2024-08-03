@@ -48,7 +48,7 @@ export default function Welcome() {
           }
         >
           <SpaceBetween size="l">
-          <Cards
+            <Cards
               cardDefinition={{
                 header: (item) => item.name,
                 sections: [

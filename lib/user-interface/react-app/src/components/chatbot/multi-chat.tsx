@@ -207,13 +207,13 @@ export default function MultiChat() {
         {
           type: ChatBotMessageType.Human,
           content: value,
-          data:{"questions": [] , "answers": []},
-          metadata: {}
+          data: { questions: [], answers: [] },
+          metadata: {},
         },
         {
           type: ChatBotMessageType.AI,
           content: "",
-          data:{"questions": [] , "answers": []},
+          data: { questions: [], answers: [] },
           metadata: {},
         },
       ];
@@ -238,7 +238,7 @@ export default function MultiChat() {
       },
       authMode: "AMAZON_COGNITO_USER_POOLS",
     }).subscribe({
-      next: ({value} : {value:any}) => {
+      next: ({ value }: { value: any }) => {
         const data = value.data!.receiveMessages?.data;
         if (data !== undefined && data !== null) {
           const response: ChatBotMessageResponse = JSON.parse(data);
@@ -373,9 +373,9 @@ export default function MultiChat() {
                 readyState === ReadyState.OPEN
                   ? "success"
                   : readyState === ReadyState.CONNECTING ||
-                    readyState === ReadyState.UNINSTANTIATED
-                  ? "in-progress"
-                  : "error"
+                      readyState === ReadyState.UNINSTANTIATED
+                    ? "in-progress"
+                    : "error"
               }
             >
               {readyState === ReadyState.OPEN ? "Connected" : connectionStatus}
@@ -553,7 +553,7 @@ function transformMessages(sessions: ChatSession[]) {
       } else {
         current.push({
           type: ChatBotMessageType.AI,
-          data:{"questions": [] , "answers": []},
+          data: { questions: [], answers: [] },
           content: "",
           metadata: {},
         });

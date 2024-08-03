@@ -190,7 +190,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
         })
         .catch((err) => console.log(err));
     };
-    // eslint-disable-next-line
+     
   }, [props.session.id]);
 
   useEffect(() => {
@@ -438,7 +438,7 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
               />
             ) : (
               <Icon name="microphone-off" variant="disabled" />
-            )}            
+            )}
           </SpaceBetween>
           <ImageDialog
             sessionId={props.session.id}
@@ -597,9 +597,9 @@ export default function ChatInputPanel(props: ChatInputPanelProps) {
                 readyState === ReadyState.OPEN
                   ? "success"
                   : readyState === ReadyState.CONNECTING ||
-                    readyState === ReadyState.UNINSTANTIATED
-                  ? "in-progress"
-                  : "error"
+                      readyState === ReadyState.UNINSTANTIATED
+                    ? "in-progress"
+                    : "error"
               }
             >
               {readyState === ReadyState.OPEN ? "Connected" : connectionStatus}

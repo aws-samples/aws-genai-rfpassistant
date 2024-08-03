@@ -128,7 +128,7 @@ export function updateMessageHistoryRef(
     response.action === ChatBotAction.FinalResponse ||
     response.action === ChatBotAction.Question ||
     response.action === ChatBotAction.Answer ||
-    response.action === ChatBotAction.Error 
+    response.action === ChatBotAction.Error
   ) {
     const content = response.data?.content;
     let metadata = response.data?.metadata;
@@ -136,7 +136,10 @@ export function updateMessageHistoryRef(
     const hasContent = typeof content !== "undefined";
     const hasToken = typeof token !== "undefined";
     const hasMetadata = typeof metadata !== "undefined";
-    if ( messageHistory.length > 0 && messageHistory.at(-1)?.type !== ChatBotMessageType.Human) {
+    if (
+      messageHistory.length > 0 &&
+      messageHistory.at(-1)?.type !== ChatBotMessageType.Human
+    ) {
       const lastMessage = messageHistory.at(-1)!;
       lastMessage.tokens = lastMessage.tokens ?? [];
       if (hasToken) {
@@ -157,13 +160,17 @@ export function updateMessageHistoryRef(
       if (!hasMetadata) {
         metadata = lastMessage.metadata;
       }
-      
-      if(response.action === ChatBotAction.Question){
-        messageHistory[messageHistory.length - 1].data.questions.push(content|| '');
-      }else if(response.action === ChatBotAction.Answer){
+
+      if (response.action === ChatBotAction.Question) {
+        messageHistory[messageHistory.length - 1].data.questions.push(
+          content || ""
+        );
+      } else if (response.action === ChatBotAction.Answer) {
         console.log(response.data);
-        messageHistory[messageHistory.length - 1].data.answers.push(response.data);
-      }else{
+        messageHistory[messageHistory.length - 1].data.answers.push(
+          response.data
+        );
+      } else {
         if (hasContent || lastMessage.content.length > 0) {
           messageHistory[messageHistory.length - 1] = {
             ...lastMessage,
@@ -182,14 +189,13 @@ export function updateMessageHistoryRef(
           };
         }
       }
-
     } else {
       if (hasContent) {
         const tokens = hasToken ? [token] : [];
         messageHistory.push({
           type: ChatBotMessageType.AI,
           content,
-          data: {"questions": [] , "answers": []},
+          data: { questions: [], answers: [] },
           metadata,
           tokens,
         });
@@ -197,14 +203,13 @@ export function updateMessageHistoryRef(
         messageHistory.push({
           type: ChatBotMessageType.AI,
           content: token.value,
-          data: {"questions": [] , "answers": []},
+          data: { questions: [], answers: [] },
           metadata,
           tokens: [token],
         });
       }
     }
-  }
-  else {
+  } else {
     console.info(`Unrecognized type ${response.action}`);
   }
 }

@@ -191,7 +191,7 @@ export class IdeficsInterface extends Construct {
         environment: {
           ...props.shared.defaultEnvironmentVariables,
           CONFIG_PARAMETER_NAME: props.shared.configParameter.parameterName,
-          SESSIONS_TABLE_NAME: props.sessionsTable.tableName,          
+          SESSIONS_TABLE_NAME: props.sessionsTable.tableName,
           QUESTIONS_TABLE_NAME: props.questionsTable.tableName,
           QUESTIONS_BY_SESSION_INDEX_NAME: props.bySessionIdIndex,
           MESSAGES_TOPIC_ARN: props.messagesTopic.topicArn,

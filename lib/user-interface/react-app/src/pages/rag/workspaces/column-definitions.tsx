@@ -7,7 +7,7 @@ import RouterLink from "../../../components/wrappers/router-link";
 import { Labels } from "../../../common/constants";
 import { DateTime } from "luxon";
 import { Workspace } from "../../../API";
-
+/* eslint-disable react-refresh/only-export-components */
 export const WorkspacesColumnDefinitions: TableProps.ColumnDefinition<Workspace>[] =
   [
     {

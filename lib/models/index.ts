@@ -1,4 +1,3 @@
-import * as cdk from "aws-cdk-lib";
 import * as ssm from "aws-cdk-lib/aws-ssm";
 import { Construct } from "constructs";
 import * as iam from "aws-cdk-lib/aws-iam";
@@ -18,7 +17,7 @@ import {
   JumpStartModel,
 } from "@cdklabs/generative-ai-cdk-constructs";
 import { NagSuppressions } from "cdk-nag";
-import { createStartSchedule, createStopSchedule } from "./sagemaker-schedule"
+import { createStartSchedule, createStopSchedule } from "./sagemaker-schedule";
 
 export interface ModelsProps {
   readonly config: SystemConfig;
@@ -378,20 +377,33 @@ export class Models extends Construct {
 
     this.models = models;
     this.modelsParameter = modelsParameter;
-    
-    if (models.length > 0 && props.config.llms?.sagemakerSchedule?.enabled) {
 
-      let schedulerRole: iam.Role = new iam.Role(this, 'SchedulerRole', {
-        assumedBy: new iam.ServicePrincipal('scheduler.amazonaws.com'),
-        description: 'Role for Scheduler to interact with SageMaker',
+    if (models.length > 0 && props.config.llms?.sagemakerSchedule?.enabled) {
+      const schedulerRole: iam.Role = new iam.Role(this, "SchedulerRole", {
+        assumedBy: new iam.ServicePrincipal("scheduler.amazonaws.com"),
+        description: "Role for Scheduler to interact with SageMaker",
       });
-      
-      schedulerRole.addManagedPolicy(iam.ManagedPolicy.fromAwsManagedPolicyName('AmazonSageMakerFullAccess'));
+
+      schedulerRole.addManagedPolicy(
+        iam.ManagedPolicy.fromAwsManagedPolicyName("AmazonSageMakerFullAccess")
+      );
       this.suppressCdkNagWarningForEndpointRole(schedulerRole);
 
       models.forEach((model) => {
-          createStartSchedule(this, id, model.endpoint, schedulerRole, props.config);
-          createStopSchedule(this, id, model.endpoint, schedulerRole, props.config);
+        createStartSchedule(
+          this,
+          id,
+          model.endpoint,
+          schedulerRole,
+          props.config
+        );
+        createStopSchedule(
+          this,
+          id,
+          model.endpoint,
+          schedulerRole,
+          props.config
+        );
       });
     }
   }

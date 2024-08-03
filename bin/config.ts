@@ -14,7 +14,7 @@ export function getConfig(): SystemConfig {
     },*/
     privateWebsite: false,
     companyName: "AnyCompany",
-    certificate : "",
+    certificate: "",
     cfGeoRestrictEnable: false,
     cfGeoRestrictList: [],
     bedrock: {
@@ -37,10 +37,10 @@ export function getConfig(): SystemConfig {
         kendra: {
           enabled: false,
           createIndex: false,
-          enterprise: false
+          enterprise: false,
         },
       },
-      embeddingsModels: [        
+      embeddingsModels: [
         {
           provider: "bedrock",
           name: "amazon.titan-embed-text-v1",
@@ -62,7 +62,7 @@ export function getConfig(): SystemConfig {
           name: "cohere.embed-multilingual-v3",
           dimensions: 1024,
           default: true,
-        }
+        },
       ],
       crossEncoderModels: [
         {

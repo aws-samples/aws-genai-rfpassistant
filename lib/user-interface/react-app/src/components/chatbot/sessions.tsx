@@ -60,7 +60,7 @@ export default function Sessions(props: SessionsProps) {
 
     const apiClient = new ApiClient(appContext);
     try {
-      const result = await apiClient.sessions.getSessions('rfp');
+      const result = await apiClient.sessions.getSessions("rfp");
       setSessions(result.data!.listSessions);
     } catch (e) {
       console.log(e);
@@ -79,64 +79,65 @@ export default function Sessions(props: SessionsProps) {
   }, [appContext, getSessions, props.toolsOpen]);
 
   const deleteSelectedSessions = async () => {
-    setShowModalDelete(false)
+    setShowModalDelete(false);
     if (!appContext) return;
 
     setIsLoading(true);
     const apiClient = new ApiClient(appContext);
     await Promise.all(
-      selectedItems.map((s) => apiClient.sessions.deleteSession(s.id, 'rfp'))
+      selectedItems.map((s) => apiClient.sessions.deleteSession(s.id, "rfp"))
     );
     await getSessions();
     setIsLoading(false);
   };
 
   const deleteUserSessions = async () => {
-    setDeleteAllSessions(false)
+    setDeleteAllSessions(false);
     if (!appContext) return;
 
     setIsLoading(true);
     const apiClient = new ApiClient(appContext);
-    await apiClient.sessions.deleteSessions('rfp');
+    await apiClient.sessions.deleteSessions("rfp");
     await getSessions();
     setIsLoading(false);
   };
 
-  const handleDownload = async (id : string, s3ObjectKey : string) => {
+  const handleDownload = async (id: string, s3ObjectKey: string) => {
     try {
-      
       if (!appContext) return;
-      
-      if (!s3ObjectKey || typeof s3ObjectKey !== 'string') {
-        console.error('Invalid S3 key');
-        return ;
+
+      if (!s3ObjectKey || typeof s3ObjectKey !== "string") {
+        console.error("Invalid S3 key");
+        return;
       }
-      
-      const parts = s3ObjectKey.split('/');
-      const filekey =  parts[parts.length - 1];
-      
+
+      const parts = s3ObjectKey.split("/");
+      const filekey = parts[parts.length - 1];
+
       const downloadFileData: DownloadFileData = {
         SessionId: id,
-        S3ObjectKey: filekey
-      }
+        S3ObjectKey: filekey,
+      };
 
-      const apiClient = new ApiClient(appContext)
-      const res = await apiClient.userFeedback.downloadFile({ downloadFileData })
+      const apiClient = new ApiClient(appContext);
+      const res = await apiClient.userFeedback.downloadFile({
+        downloadFileData,
+      });
 
-      if(res?.data?.downloadFile?.s3Uri){
+      if (res?.data?.downloadFile?.s3Uri) {
         // Create a link and trigger a download
-        let s3Uri = res.data.downloadFile.s3Uri
+        const s3Uri = res.data.downloadFile.s3Uri;
         const signedUrl = await getSignedUrl(s3Uri);
-        const link = document.createElement('a');
-        link.href = signedUrl;        
+        const link = document.createElement("a");
+        link.href = signedUrl;
         document.body.appendChild(link);
         link.click();
         link.remove();
       } else {
-        console.error('Failed to generate presigned URL');
+        console.error("Failed to generate presigned URL");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -313,10 +314,12 @@ export default function Sessions(props: SessionsProps) {
             },
             {
               id: "Download",
-              header: "Download Responses",                            
+              header: "Download Responses",
               cell: (e: Session) => (
-                <Button onClick={() => handleDownload(e.id!, e.s3ObjectKey!)}>Download</Button>
-              ),              
+                <Button onClick={() => handleDownload(e.id!, e.s3ObjectKey!)}>
+                  Download
+                </Button>
+              ),
             },
           ] as TableProps.ColumnDefinition<Session>[]
         }
