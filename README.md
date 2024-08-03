@@ -4,8 +4,8 @@
 - [RFP Assistant - Powered by Amazon Bedrock and AWS CDK](#rfp-assistant---powered-by-amazon-bedrock-and-aws-cdk)
   - [Table of contents](#table-of-contents)
   - [Overview](#overview)
-  - [Configuration](#configuration)
   - [Special Mention](#special-mention)
+  - [Configuration](#configuration)
   - [Deployment](#deployment)
     - [Environment setup](#environment-setup)
       - [AWS Cloud9](#aws-cloud9)
@@ -55,7 +55,10 @@
   - [⚠️ Precautions ⚠️](#️-precautions-️)
 
 ## Overview
+This repository contains the code and infrastructure as code for a Generative AI-powered Request for Proposal (RFP) Assistant leveraging Amazon Bedrock and AWS Cloud Development Kit (CDK).
 
+## Special Mention
+This project incorporates code and resources from the [aws-genai-llm-chatbot](https://github.com/aws-samples/aws-genai-llm-chatbot/) repository. We are grateful for their contributions and the open-source community's collaborative spirit. The original repository can be found at [Repository URL](https://github.com/aws-samples/aws-genai-llm-chatbot/), and we encourage others to explore and contribute to their excellent work.
 
 ## Configuration
 
@@ -126,8 +129,6 @@ Before deploying the solution, make sure the configuration in ``bin/config.json`
   }
 }
 ```
-## Special Mention
-This project incorporates code and resources from the [aws-genai-llm-chatbot](https://github.com/aws-samples/aws-genai-llm-chatbot/) repository. We are grateful for their contributions and the open-source community's collaborative spirit. The original repository can be found at [Repository URL](https://github.com/aws-samples/aws-genai-llm-chatbot/), and we encourage others to explore and contribute to their excellent work.
 
 ## Deployment
 

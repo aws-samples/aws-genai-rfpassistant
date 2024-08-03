@@ -1,0 +1,34 @@
+name: smoke-build
+on: 
+  push:
+  pull_request:
+jobs:
+  build-cdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+      - name: Formatting
+        run: |
+          npm ci
+          cd ./lib/user-interface/react-app
+          npm ci
+          cd -
+          npm run lint
+      - name: Backend
+        run: |
+          npm ci
+          npm run build
+          npm run test
+          npx cdk synth
+      - name: PyTests
+        run: |
+          pip install -r pytest_requirements.txt
+          pytest tests/
+      - name: Frontend
+        working-directory: ./lib/user-interface/react-app
+        run: |
+          npm ci
+          npm run build
