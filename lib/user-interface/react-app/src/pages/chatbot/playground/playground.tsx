@@ -10,9 +10,13 @@ export default function Playground() {
   return (
     <BaseAppLayout
       info={
-        <HelpPanel header={<Header variant="h3">Using the RFP Assistant</Header>}>
+        <HelpPanel
+          header={<Header variant="h3">Using the RFP Assistant</Header>}
+        >
           <p>
-            This chat playground allows user to interact with a chosen LLM and upload the RFP questions as excel to generate answers. You can create new RAG workspaces via the{" "}
+            This chat playground allows user to interact with a chosen LLM and
+            upload the RFP questions as excel to generate answers. You can
+            create new RAG workspaces via the{" "}
             <Link to="/rag/workspaces">Workspaces</Link> console.
           </p>
           <h3>Settings</h3>
@@ -25,7 +29,7 @@ export default function Playground() {
             Metadata displays additional information about the answer, such as
             the prompts being used to interact with the LLM and the document
             passages that might have been retrieved from the RAG storage.
-          </p>         
+          </p>
           <h3>Session history</h3>
           <p>
             All conversations are saved and can be later accessed via the{" "}

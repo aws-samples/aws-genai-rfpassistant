@@ -48,7 +48,10 @@ export default function Chat(props: { sessionId?: string }) {
       setSession({ id: props.sessionId, loading: true });
       const apiClient = new ApiClient(appContext);
       try {
-        const result = await apiClient.sessions.getSession(props.sessionId, 'chat');
+        const result = await apiClient.sessions.getSession(
+          props.sessionId,
+          "chat"
+        );
 
         if (result.data?.getSession?.history) {
           console.log(result.data.getSession);
@@ -78,7 +81,6 @@ export default function Chat(props: { sessionId?: string }) {
       setRunning(false);
     })();
   }, [appContext, props.sessionId]);
-
 
   return (
     <div className={styles.chat_container}>

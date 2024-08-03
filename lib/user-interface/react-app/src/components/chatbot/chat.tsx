@@ -5,7 +5,12 @@ import {
   ChatBotMessageType,
   //FeedbackData,
 } from "./types";
-import { SpaceBetween, StatusIndicator, Button, Spinner } from "@cloudscape-design/components";
+import {
+  SpaceBetween,
+  StatusIndicator,
+  Button,
+  Spinner,
+} from "@cloudscape-design/components";
 import { v4 as uuidv4 } from "uuid";
 import { AppContext } from "../../common/app-context";
 import { ApiClient } from "../../common/api-client/api-client";
@@ -38,37 +43,36 @@ export default function Chat(props: { sessionId?: string }) {
     []
   );
   const [files, setFiles] = useState<ImageFile[]>([] as ImageFile[]);
-  const [downloadResponsesStatus, setDownloadResponsesStatus] = useState(false)
-  const [responseFileLink, setResponseFileLink] = useState("")
-  const [fileDownloadLoader, setFileDownloadLoader] = useState(false)
+  const [downloadResponsesStatus, setDownloadResponsesStatus] = useState(false);
+  const [responseFileLink, setResponseFileLink] = useState("");
+  const [fileDownloadLoader, setFileDownloadLoader] = useState(false);
 
   const downloadFile = async (key: string) => {
     if (!appContext) return;
 
     const downloadFileData: DownloadFileData = {
       SessionId: session.id,
-      S3ObjectKey: key
-    }
-    const apiClient = new ApiClient(appContext)
-    const res = await apiClient.userFeedback.downloadFile({ downloadFileData })
-    return res
-  }
+      S3ObjectKey: key,
+    };
+    const apiClient = new ApiClient(appContext);
+    const res = await apiClient.userFeedback.downloadFile({ downloadFileData });
+    return res;
+  };
   const downloadResponseFile = async () => {
-    setFileDownloadLoader(true)
+    setFileDownloadLoader(true);
     if (files as ImageFile[]) {
       // const files: ImageFile[] = [];
       for await (const file of files as ImageFile[]) {
-        let res = await downloadFile(file.key)
-        if(res?.data?.downloadFile?.s3Uri){
-          let s3Uri = res.data.downloadFile.s3Uri
+        const res = await downloadFile(file.key);
+        if (res?.data?.downloadFile?.s3Uri) {
+          const s3Uri = res.data.downloadFile.s3Uri;
           const signedUrl = await getSignedUrl(s3Uri);
-          setResponseFileLink(signedUrl)
+          setResponseFileLink(signedUrl);
         }
       }
     }
-    setFileDownloadLoader(false)
-  }
-
+    setFileDownloadLoader(false);
+  };
 
   useEffect(() => {
     if (!appContext) return;
@@ -77,15 +81,18 @@ export default function Chat(props: { sessionId?: string }) {
     (async () => {
       if (!props.sessionId) {
         setSession({ id: uuidv4(), loading: false });
-        setDownloadResponsesStatus(false)
-        setResponseFileLink("")
+        setDownloadResponsesStatus(false);
+        setResponseFileLink("");
         return;
       }
 
       setSession({ id: props.sessionId, loading: true });
       const apiClient = new ApiClient(appContext);
       try {
-        const result = await apiClient.sessions.getSession(props.sessionId, "rfp");
+        const result = await apiClient.sessions.getSession(
+          props.sessionId,
+          "rfp"
+        );
 
         if (result.data?.getSession?.history) {
           console.log(result.data.getSession);
@@ -99,7 +106,7 @@ export default function Chat(props: { sessionId?: string }) {
                 type: x!.type as ChatBotMessageType,
                 metadata: JSON.parse(x!.metadata!),
                 content: x!.content,
-                data: x!.data
+                data: x!.data,
               }))
           );
 
@@ -148,27 +155,28 @@ export default function Chat(props: { sessionId?: string }) {
   };
 */
 
-
   return (
     <div className={styles.chat_container}>
-      <div style={{textAlign:"center"}}>
-        {(downloadResponsesStatus) && (
-          <div style={{display:"inline-block"}}>
-            <Button variant="primary" onClick={downloadResponseFile}>{fileDownloadLoader && <Spinner/>}Generate response file</Button>
+      <div style={{ textAlign: "center" }}>
+        {downloadResponsesStatus && (
+          <div style={{ display: "inline-block" }}>
+            <Button variant="primary" onClick={downloadResponseFile}>
+              {fileDownloadLoader && <Spinner />}Generate response file
+            </Button>
           </div>
         )}
-        {
-          (responseFileLink != "") && (
-            <div style={{display:"inline-block"}}>
-              <a href={responseFileLink as string} target="_blank" rel="noreferrer">
-                <Button variant="primary">Download response file</Button>
-              </a>
-            </div>
-
-          )
-        }
+        {responseFileLink != "" && (
+          <div style={{ display: "inline-block" }}>
+            <a
+              href={responseFileLink as string}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button variant="primary">Download response file</Button>
+            </a>
+          </div>
+        )}
       </div>
-
 
       <SpaceBetween direction="vertical" size="m">
         {messageHistory.map((message, idx) => (
@@ -178,8 +186,8 @@ export default function Chat(props: { sessionId?: string }) {
             showMetadata={configuration.showMetadata}
             files={files}
             setFiles={setFiles}
-          //onThumbsUp={() => handleFeedback(1, idx, message)}
-          //onThumbsDown={() => handleFeedback(0, idx, message)}
+            //onThumbsUp={() => handleFeedback(1, idx, message)}
+            //onThumbsDown={() => handleFeedback(0, idx, message)}
           />
         ))}
       </SpaceBetween>

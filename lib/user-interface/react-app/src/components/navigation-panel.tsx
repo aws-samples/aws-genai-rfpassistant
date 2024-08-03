@@ -44,7 +44,11 @@ export default function NavigationPanel() {
         type: "section",
         text: "Chat Assistant",
         items: [
-          { type: "link", text: "Chat-Playground", href: "/chatbot/chat-playground" },
+          {
+            type: "link",
+            text: "Chat-Playground",
+            href: "/chatbot/chat-playground",
+          },
           /*
           {
             type: "link",
@@ -68,9 +72,8 @@ export default function NavigationPanel() {
       },
     ];
 
-    
     if (appContext?.config.rag_enabled) {
-    /*  const crossEncodersItems: SideNavigationProps.Item[] = appContext?.config
+      /*  const crossEncodersItems: SideNavigationProps.Item[] = appContext?.config
         .cross_encoders_enabled
         ? [
             {
@@ -81,7 +84,7 @@ export default function NavigationPanel() {
           ]
         : [];
       */
-      
+
       items.push({
         type: "section",
         text: "Documents",
@@ -106,7 +109,7 @@ export default function NavigationPanel() {
       });
     }
 
-  /*
+    /*
     items.push(
       { type: "divider" },
       {

@@ -4,7 +4,7 @@ import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
 
 export class ChatBotDynamoDBTables extends Construct {
   public readonly sessionsTable: dynamodb.Table;
-  public readonly questionsTable: dynamodb.Table;  
+  public readonly questionsTable: dynamodb.Table;
   public readonly bySessionIdIndex: string = "bySessionId";
 
   constructor(scope: Construct, id: string) {
@@ -53,6 +53,5 @@ export class ChatBotDynamoDBTables extends Construct {
     });
 
     this.questionsTable = questionsTable;
-
   }
 }

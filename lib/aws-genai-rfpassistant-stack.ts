@@ -72,7 +72,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
           sessionsTable: chatBotApi.sessionsTable,
           questionsTable: chatBotApi.questionsTable,
           bySessionIdIndex: chatBotApi.bySessionIdIndex,
-          filesBucket: chatBotApi.filesBucket
+          filesBucket: chatBotApi.filesBucket,
         }
       );
 
@@ -114,7 +114,7 @@ export class AwsGenaiRfpAssistantStack extends cdk.Stack {
       shared,
       config: props.config,
       messagesTopic: chatBotApi.messagesTopic,
-      sessionsTable: chatBotApi.sessionsTable,    
+      sessionsTable: chatBotApi.sessionsTable,
       questionsTable: chatBotApi.questionsTable,
       bySessionIdIndex: chatBotApi.bySessionIdIndex,
       chatbotFilesBucket: chatBotApi.filesBucket,

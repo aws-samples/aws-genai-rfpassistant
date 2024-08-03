@@ -264,7 +264,7 @@ export class ApiResolvers extends Construct {
       props.sessionsTable.grantReadWriteData(apiHandler);
       props.questionsTable.grantReadWriteData(apiHandler);
       props.filesBucket.grantReadWrite(apiHandler);
-      props.userFeedbackBucket.grantReadWrite(apiHandler);      
+      props.userFeedbackBucket.grantReadWrite(apiHandler);
       props.ragEngines?.uploadBucket.grantReadWrite(apiHandler);
       props.ragEngines?.processingBucket.grantReadWrite(apiHandler);
 

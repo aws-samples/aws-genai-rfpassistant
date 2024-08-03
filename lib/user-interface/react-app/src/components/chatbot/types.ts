@@ -35,7 +35,7 @@ export enum ChatBotAction {
   Error = "error",
   Started = "started",
   Question = "questions",
-  Answer = "answer"
+  Answer = "answer",
 }
 
 export enum ChatBotModelInterface {
@@ -105,8 +105,8 @@ export interface ChatBotHistoryItem {
   type: ChatBotMessageType;
   content: string;
   data: {
-    questions:  string[];
-    answers: any [];
+    questions: string[];
+    answers: any[];
   };
   metadata: Record<
     string,
@@ -166,6 +166,6 @@ export interface FeedbackData {
 }
 
 export interface DownloadFileData {
-  SessionId: string,
-  S3ObjectKey: string
+  SessionId: string;
+  S3ObjectKey: string;
 }

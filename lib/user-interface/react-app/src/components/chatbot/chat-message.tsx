@@ -34,8 +34,8 @@ export interface ChatMessageProps {
   message: ChatBotHistoryItem;
   configuration?: ChatBotConfiguration;
   showMetadata?: boolean;
-  files?:any
-  setFiles?: any
+  files?: any;
+  setFiles?: any;
   //onThumbsUp: () => void;
   //onThumbsDown: () => void;
 }
@@ -46,7 +46,7 @@ export default function ChatMessage(props: ChatMessageProps) {
   const [documentIndex, setDocumentIndex] = useState("0");
   const [promptIndex, setPromptIndex] = useState("0");
   //const [selectedIcon, setSelectedIcon] = useState<1 | 0 | null>(null);
-  
+
   useEffect(() => {
     const getSignedUrls = async () => {
       setLoading(true);
@@ -81,8 +81,7 @@ export default function ChatMessage(props: ChatMessageProps) {
         <Container
           key={props?.key}
           footer={
-            (
-              (props?.showMetadata && props.message.metadata) ||
+            ((props?.showMetadata && props.message.metadata) ||
               (props.message.metadata &&
                 props.configuration?.showMetadata)) && (
               <ExpandableSection variant="footer" headerText="Metadata">
@@ -177,7 +176,7 @@ export default function ChatMessage(props: ChatMessageProps) {
                           onClick={() => {
                             navigator.clipboard.writeText(
                               (props.message.metadata.prompts as string[][])[
-                              parseInt(promptIndex)
+                                parseInt(promptIndex)
                               ][0]
                             );
                           }}
@@ -189,11 +188,12 @@ export default function ChatMessage(props: ChatMessageProps) {
                         (p, i) => {
                           return {
                             id: `${i}`,
-                            label: `Prompt ${(props.message.metadata.prompts as string[][])
+                            label: `Prompt ${
+                              (props.message.metadata.prompts as string[][])
                                 .length > 1
                                 ? i + 1
                                 : ""
-                              }`,
+                            }`,
                             content: (
                               <>
                                 <Textarea
@@ -213,7 +213,6 @@ export default function ChatMessage(props: ChatMessageProps) {
                     />
                   </>
                 )}
-
               </ExpandableSection>
             )
           }
@@ -223,8 +222,7 @@ export default function ChatMessage(props: ChatMessageProps) {
               <Spinner />
             </Box>
           ) : null}
-          {
-          /*props.message.content.length > 0 ? (
+          {/*props.message.content.length > 0 ? (
             <div className={styles.btn_chabot_message_copy}>
               <Popover
                 size="medium"
@@ -247,10 +245,8 @@ export default function ChatMessage(props: ChatMessageProps) {
               </Popover>
             </div>
                 ) : null*/}
-          
-          {
-            <Sheet key={props.key} data={props.message.data} />
-          }
+
+          {<Sheet key={props.key} data={props.message.data} />}
           {/* <ReactMarkdown
             children={content}
             remarkPlugins={[remarkGfm]}
@@ -289,8 +285,7 @@ export default function ChatMessage(props: ChatMessageProps) {
               },
             }}
           /> */}
-          {
-            /*
+          {/*
               <div className={styles.thumbsContainer}>
             {(selectedIcon === 1 || selectedIcon === null) && (
               <Button
@@ -315,9 +310,7 @@ export default function ChatMessage(props: ChatMessageProps) {
               />
             )}
           </div>
-            */
-          }
-          
+            */}
         </Container>
       )}
       {loading && (

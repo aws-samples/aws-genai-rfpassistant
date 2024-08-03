@@ -24,13 +24,18 @@ export interface ImageDialogProps {
 }
 
 // const ALLOWED_MIME_TYPES = ["image/png", "image/jpg", "image/jpeg"];
-const ALLOWED_MIME_TYPES = [ "text/csv", "application/vnd.ms-excel", "application/msexcel", "application/x-msexcel",
+const ALLOWED_MIME_TYPES = [
+  "text/csv",
+  "application/vnd.ms-excel",
+  "application/msexcel",
+  "application/x-msexcel",
   "application/x-ms-excel",
   "application/x-excel",
   "application/x-dos_ms_excel",
   "application/xls",
   "application/x-xls",
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+];
 
 export default function ImageDialog(props: ImageDialogProps) {
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +69,9 @@ export default function ImageDialog(props: ImageDialogProps) {
     if (!validate()) return;
     setLoading(true);
 
-    const files: ImageFile[] = (await uploadFiles(data.files)) as unknown as ImageFile[];
+    const files: ImageFile[] = (await uploadFiles(
+      data.files
+    )) as unknown as ImageFile[];
 
     props.setConfiguration({
       ...props.configuration,
@@ -148,7 +155,7 @@ export default function ImageDialog(props: ImageDialogProps) {
 
     return {
       ...response,
-      "s3_uri": s3URI,
+      s3_uri: s3URI,
     };
   };
 

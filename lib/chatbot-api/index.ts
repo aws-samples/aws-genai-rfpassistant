@@ -29,7 +29,7 @@ export interface ChatBotApiProps {
 
 export class ChatBotApi extends Construct {
   public readonly messagesTopic: sns.Topic;
-  public readonly sessionsTable: dynamodb.Table; 
+  public readonly sessionsTable: dynamodb.Table;
   public readonly questionsTable: dynamodb.Table;
   public readonly bySessionIdIndex: string;
   public readonly filesBucket: s3.Bucket;
@@ -81,7 +81,9 @@ export class ChatBotApi extends Construct {
         role: loggingRole,
       },
       xrayEnabled: true,
-      visibility: props.config.privateWebsite ? appsync.Visibility.PRIVATE : appsync.Visibility.GLOBAL
+      visibility: props.config.privateWebsite
+        ? appsync.Visibility.PRIVATE
+        : appsync.Visibility.GLOBAL,
     });
 
     new ApiResolvers(this, "RestApi", {
@@ -117,7 +119,7 @@ export class ChatBotApi extends Construct {
     });
 
     this.messagesTopic = realtimeBackend.messagesTopic;
-    this.sessionsTable = chatTables.sessionsTable;    
+    this.sessionsTable = chatTables.sessionsTable;
     this.questionsTable = chatTables.questionsTable;
     this.bySessionIdIndex = chatTables.bySessionIdIndex;
     this.userFeedbackBucket = chatBuckets.userFeedbackBucket;

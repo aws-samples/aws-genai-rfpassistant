@@ -40,7 +40,7 @@ export class RagEngines extends Construct {
 
     const tables = new RagDynamoDBTables(this, "RagDynamoDBTables");
 
-    let sageMakerRagModels: SageMakerRagModels | null = null;
+    const sageMakerRagModels: SageMakerRagModels | null = null;
     // if (
     //   props.config.rag.engines.aurora.enabled ||
     //   props.config.rag.engines.opensearch.enabled

@@ -141,7 +141,7 @@ export function updateMessageHistoryRef(
       if (hasToken) {
         lastMessage.tokens.push(token);
       }
-      
+
       lastMessage.tokens.sort((a, b) => a.sequenceNumber - b.sequenceNumber);
       if (lastMessage.tokens.length > 0) {
         const lastRunId =
@@ -235,14 +235,12 @@ export function updateChatSessions(
       if (hasToken) {
         lastMessage.tokens.push(token);
       }
-    
-       const tokenMap = lastMessage.tokens.reduce((acc, token) => {
-         acc.set(token.sequenceNumber, token);
-         return acc;
-       }, new Map<number, ChatBotToken>());
-       lastMessage.tokens = Array.from(tokenMap.values());
-  
 
+      const tokenMap = lastMessage.tokens.reduce((acc, token) => {
+        acc.set(token.sequenceNumber, token);
+        return acc;
+      }, new Map<number, ChatBotToken>());
+      lastMessage.tokens = Array.from(tokenMap.values());
 
       lastMessage.tokens.sort((a, b) => a.sequenceNumber - b.sequenceNumber);
       if (lastMessage.tokens.length > 0) {

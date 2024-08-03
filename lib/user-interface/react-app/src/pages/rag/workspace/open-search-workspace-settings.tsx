@@ -38,7 +38,7 @@ export default function OpenSearchWorkspaceSettings(
             <Box variant="awsui-key-label">Languages</Box>
             <div>
               {(props.workspace.languages ?? [])
-                .map((c:any) => Labels.languageMap.get(c!))
+                .map((c: any) => Labels.languageMap.get(c!))
                 .join(", ")}
             </div>
           </div>
