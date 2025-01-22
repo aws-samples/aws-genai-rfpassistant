@@ -162,6 +162,10 @@ See the documentation for more details on [environment resize](https://docs.aws.
 
 You can now proceed with the [deployment](#deployement)
 
+## Run on [Codeanywhere](https://codeanywhere.com)
+
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/aws-samples/aws-genai-rfpassistant)
+
 #### Github Codespaces
 
 To use [GitHub Codespaces](https://github.com/features/codespaces) to deploy the solution, you need the following before proceeding:
@@ -174,6 +178,7 @@ After creating the user, take note of `Access Key ID` and `Secret Access Key`.
 Next, click on the button below to open your Codespaces environment.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/aws-samples/aws-genai-rfpassistant)
+
 
 Once in the Codespaces terminal, set up the AWS Credentials by running
 
