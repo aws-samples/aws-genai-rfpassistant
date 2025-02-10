@@ -190,6 +190,11 @@ Default output format: json
 
 You are all set for deployment; you can now jump to [step 3 of the deployment section below](#deployment-dependencies-installation).
 
+#### Run on [Codeanywhere](https://codeanywhere.com)
+Optionally, open this project and start coding immediately on Codeanywhere. 
+
+[![Open in Codeanywhere](https://codeanywhere.com/img/open-in-codeanywhere-btn.svg)](https://app.codeanywhere.com/#https://github.com/aws-samples/aws-genai-rfpassistant)
+
 #### Local machine
 
 If are using a local machine, verify that your environment satisfies the following prerequisites:
